@@ -39,14 +39,6 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Seed Database with data if it is empty. 
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-
-    SeedData.Initialize(services);
-}
-
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -66,6 +58,21 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Products}/{action=Index}/{id?}")
     .WithStaticAssets();
+
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<MiniMagContext>();
+    db.Database.Migrate();
+}
+
+// Seed Database with data if it is empty. 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    SeedData.Initialize(services);
+}
 
 
 app.Run();
