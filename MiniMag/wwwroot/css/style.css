@@ -1,0 +1,232 @@
+﻿/* ============================
+   STYL TECHNICZNY – MAGAZYN
+   Autor: ChatGPT (GPT-5)
+   ============================ */
+
+/* 🎨 Paleta kolorów */
+:root {
+    --color-primary: #0D3B66; /* Pasek nawigacji, nagłówki */
+    --color-primary-light: #1E5AA8; /* Akcenty, aktywne przyciski */
+    --color-accent: #2B6CB0; /* Główne CTA (Zapisz, Dodaj) */
+
+    --color-bg: #F8FAFC; /* Tło aplikacji */
+    --color-surface: #FFFFFF; /* Panele, tabele, formularze */
+    --color-border: #CBD5E0; /* Linie, obramowania */
+
+    --color-text-primary: #1A202C; /* Tekst główny */
+    --color-text-secondary: #4A5568; /* Opisy, etykiety */
+
+    --color-hover: #2C5282; /* Hover na przyciskach */
+    --color-focus: #3182CE; /* Focus (np. pola tekstowe) */
+    --color-disabled: #A0AEC0; /* Nieaktywne elementy */
+
+    --color-success: #2F855A; /* Sukces */
+    --color-warning: #DD6B20; /* Ostrzeżenie */
+    --color-error: #C53030; /* Błąd */
+}
+
+/* ============================
+   GLOBALNE USTAWIENIA
+   ============================ */
+
+body {
+    font-family: "Inter", "Segoe UI", sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ============================
+   NAGŁÓWEK / TOPBAR
+   ============================ */
+header {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================
+   PANEL BOCZNY
+   ============================ */
+.sidebar {
+    min-width: fit-content;
+    background-color: var(--color-primary-light);
+    color: white;
+    padding-top: 20px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+    .sidebar h2 {
+        font-size: 1.1rem;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .sidebar a {
+        display: block;
+        color: white;
+        text-decoration: none;
+        padding: 12px 20px;
+        font-weight: 500;
+        transition: background-color 0.2s ease;
+    }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background-color: var(--color-primary);
+        }
+
+/* ============================
+   GŁÓWNA ZAWARTOŚĆ
+   ============================ */
+main {
+    flex: 1;
+    padding: 24px;
+    background-color: var(--color-bg);
+    overflow-y: auto;
+}
+
+.card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* ============================
+   PRZYCISKI
+   ============================ */
+a.button {
+    text-decoration: none;
+}
+
+button,
+.button {
+    background-color: var(--color-accent);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+    button:hover,
+    .button:hover {
+        background-color: var(--color-hover);
+    }
+
+    button:disabled,
+    .button:disabled {
+        background-color: var(--color-disabled);
+        cursor: not-allowed;
+    }
+
+/* ============================
+   FORMULARZE
+   ============================ */
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 8px 10px;
+    margin: 6px 0;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background-color: var(--color-surface);
+    color: var(--color-text-primary);
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease;
+}
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+        outline: none;
+        border-color: var(--color-focus);
+        box-shadow: 0 0 0 2px rgba(49, 130, 206, 0.2);
+    }
+
+/* ============================
+   TABELA
+   ============================ */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+}
+
+th, td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+th {
+    background-color: var(--color-bg);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+}
+
+.table-with-highlight {
+    border-radius: 8px;
+    overflow: hidden;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+    .table-with-highlight tbody tr:hover td {
+        background-color: #EDF2F7;
+        border-radius: 6px;
+        transition: background-color 0.2s ease, border-radius 0.2s ease;
+    }
+
+/* ============================
+   ALERTY / KOMUNIKATY
+   ============================ */
+.alert {
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin: 10px 0;
+    font-weight: 500;
+}
+
+    .alert.success {
+        background-color: var(--color-success);
+        color: #fff;
+    }
+
+    .alert.warning {
+        background-color: var(--color-warning);
+        color: #fff;
+    }
+
+    .alert.error {
+        background-color: var(--color-error);
+        color: #fff;
+    }
+
+/* ============================
+   UKŁAD STRONY
+   ============================ */
+.layout {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+}

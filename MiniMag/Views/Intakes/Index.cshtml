@@ -1,0 +1,53 @@
+﻿@model IEnumerable<MiniMag.Models.Intake>
+
+@{
+    ViewData["Title"] = "Goods Intakes";
+}
+
+<h1 class="mb-5">Goods Intakes</h1>
+
+<p>
+    <a asp-action="Create" class="button">Create New</a>
+</p>
+<table class="table table-with-highlight">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Product)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Supplier)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Notes)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Supplier.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notes)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

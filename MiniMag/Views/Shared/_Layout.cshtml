@@ -1,0 +1,47 @@
+﻿@{
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MiniMag</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MiniMag.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style.css" />
+</head>
+<body>
+    <!-- 🔷 Główny pasek nawigacji -->
+    <header>
+        <div class="logo">📦 <strong>MiniMag</strong></div>
+    </header>
+
+    <!-- 🔹 Układ: panel boczny + główna zawartość -->
+    <div class="layout">
+        <!-- 🧭 Panel boczny -->
+        <nav class="sidebar">
+            <h2>Menu</h2>
+            <a asp-controller="Products" asp-action="Index" class="@(currentController == "Products" ? "active" : "")">📦 Stock Levels</a>
+            <a asp-controller="Intakes" asp-action="Index" class="@(currentController == "Intakes" ? "active" : "")">📥 Goods Intakes</a>
+            <a asp-controller="Issues" asp-action="Index" class="@(currentController == "Issues" ? "active" : "")">📤 Goods Issues</a>
+            <a asp-controller="Suppliers" asp-action="Index" class="@(currentController == "Suppliers" ? "active" : "")">🧾 Suppliers</a>
+        </nav>
+
+        <!-- 🧾 Główna sekcja -->
+        <main>
+            <div class="card">
+                @RenderBody()
+            </div>
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
