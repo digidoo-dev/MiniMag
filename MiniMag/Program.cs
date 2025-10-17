@@ -3,8 +3,36 @@ using Microsoft.Extensions.DependencyInjection;
 using MiniMag.Data;
 using MiniMag.Models;
 var builder = WebApplication.CreateBuilder(args);
+
+
+// Ścieżka do SQLite zależna od środowiska
+var env = builder.Environment;
+string dbPath;
+
+if (env.IsDevelopment())
+{
+    // lokalnie - folder App_Data w projekcie
+    var appDataPath = Path.Combine(env.ContentRootPath, "App_Data");
+    if (!Directory.Exists(appDataPath))
+        Directory.CreateDirectory(appDataPath);
+
+    dbPath = Path.Combine(appDataPath, "MiniMagContext-58f70efb-1f34-4349-9ad9-f0247088269b.db");
+}
+else
+{
+    // Azure Free / Linux - zapis w /home/data
+    var homePath = Environment.GetEnvironmentVariable("HOME") ?? "/home";
+    var azureDataPath = Path.Combine(homePath, "data");
+    if (!Directory.Exists(azureDataPath))
+        Directory.CreateDirectory(azureDataPath);
+
+    dbPath = Path.Combine(azureDataPath, "MiniMagContext-58f70efb-1f34-4349-9ad9-f0247088269b.db");
+}
+
+
+
 builder.Services.AddDbContext<MiniMagContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("MiniMagContext") ?? throw new InvalidOperationException("Connection string 'MiniMagContext' not found.")));
+    options.UseSqlite($"Data Source={dbPath}"));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
